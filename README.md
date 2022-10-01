@@ -14,9 +14,9 @@ This is not a package - it's a full Laravel project that you should use as a sta
 - you can visited link `domain-name.example/employees` for display Employees show via Blade
 
 # How use API in this project
-- can use api for postman: `domain-name.example/api/get_all_cats` view all ads - required method `GET`
-- can use api for postman: `domain-name.example/api/properties?cat={id}` create new ads - required method `GET`
-- can use api for postman: `domain-name.example/api/get-options-child/{id}` edit {id} ads - required method `GET`
+- can use api for postman: `domain-name.example/api/get_all_cats` view all catygories - required method `GET`
+- can use api for postman: `domain-name.example/api/properties?cat={id}` view all properties by attr catygory - required method `GET`
+- can use api for postman: `domain-name.example/api/get-options-child/{id}` view all options by attr child - required method `GET`
 
 ## License
 
