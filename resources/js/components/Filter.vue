@@ -18,9 +18,10 @@
                     </select>
                 </div>
                 <div class="mb-2" v-if="properties.length > 0" v-for="(item, index) in properties" :key="item.id">
-                    <label for="subcategories" class="form-label">{{ item.name }}</label>
+                    <label for="subcategories" class="form-label" v-if="item.name">{{ item.name }}</label>
                     <select class="form-select" v-if="item.options.length > 0" v-on:change="ChangeProperties(item.slug , $event.target.value)" :name="item.slug" aria-label="Default select example">
                         <option v-bind:value="option.id" @click="clickOptions(option.child , index , option.id)" v-for="option in item.options" :key="option.id">{{ option.name }}</option>
+                        <option @click="addInputOther(index)" :key="item.id">Other</option>
                     </select>
                     <input type="text" v-else @change="ChangeProperties(item.slug , $event.target.value)" :name="item.slug" class="form-control" :id="item.slug">
 
@@ -60,13 +61,16 @@
         data() {
             return {
                 IndexSubCategories: null,
-                item : {},
-                viewTable: false
+                item: {},
+                viewTable: false,
+                other: {}
             }
         },
         methods: {
             onChangeCategory(event) {
                 this.IndexSubCategories = event.target.selectedIndex
+                this.properties = [];
+                //this.options = [];
                 console.log(event.target.selectedIndex , this.categories[event.target.selectedIndex].children);
             },
             ChangeProperties(key , value){
@@ -76,6 +80,17 @@
             },
             viewList(){
                 this.viewTable = true;
+            },
+            addInputOther(index){
+                
+                this.other.id = this.properties[index].id;
+                this.other.slug = this.properties[index].slug;
+                this.other.other = true;
+                this.other.value = "";
+                this.other.other_value = null;
+                this.other.options = [];
+                this.properties.splice(index+1, 0, this.other);
+                this.other = {};
             }
         },
         setup() {
